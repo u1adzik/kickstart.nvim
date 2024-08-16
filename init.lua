@@ -780,6 +780,7 @@ require('lazy').setup({
             group_index = 0,
           },
           { name = 'nvim_lsp' },
+          { name = 'codeium' },
           { name = 'luasnip' },
           { name = 'path' },
         },
@@ -806,7 +807,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- Better Around/Inside textobjects
+      -- iAround/Inside textobjects
       --
       -- Examples:
       --  - va)  - [V]isually select [A]round [)]paren
