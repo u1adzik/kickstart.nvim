@@ -2,4 +2,22 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  {
+    'pmizio/typescript-tools.nvim',
+    opts = {
+      settings = {
+        expose_as_code_action = 'add_missing_imports',
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = 'all',
+          includeCompletionsForModuleExports = true,
+          quotePreference = 'auto',
+        },
+        tsserver_format_options = {
+          allowIncompleteCompletions = false,
+          allowRenameOfImportPath = false,
+        },
+      },
+    },
+  },
+}

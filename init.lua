@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,10 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
-
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.opt.relativenumber = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -163,7 +160,6 @@ vim.opt.scrolloff = 10
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -507,6 +503,8 @@ require('lazy').setup({
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
+          map('K', vim.lsp.buf.hover, 'Hover documentation')
+
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -661,7 +659,14 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        css = { 'prettierd', 'prettier', stop_after_first = true },
+        scss = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -722,9 +727,9 @@ require('lazy').setup({
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
+          -- ['<C-n>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          -- ['<C-p>'] = cmp.mapping.select_prev_item(),
 
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -733,18 +738,18 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          -- ['<C-y>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
-          ['<C-Space>'] = cmp.mapping.complete {},
+          ['<C-a>'] = cmp.mapping.complete {},
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
@@ -787,16 +792,11 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    'Mofiqul/dracula.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+    config = function()
+      vim.o.background = 'dark'
+      vim.cmd.colorscheme 'dracula'
     end,
   },
 
@@ -806,7 +806,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- Better Around/Inside textobjects
+      -- iAround/Inside textobjects
       --
       -- Examples:
       --  - va)  - [V]isually select [A]round [)]paren
@@ -881,18 +881,18 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
