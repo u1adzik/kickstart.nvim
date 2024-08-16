@@ -806,7 +806,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- iAround/Inside textobjects
+      -- Better Around/Inside textobjects
       --
       -- Examples:
       --  - va)  - [V]isually select [A]round [)]paren
