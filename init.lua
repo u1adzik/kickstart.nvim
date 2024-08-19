@@ -104,6 +104,9 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
+vim.opt.smartindent = true
+vim.opt.expandtab = true
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -225,6 +228,7 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+  'tpope/vim-sleuth',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
