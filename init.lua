@@ -115,10 +115,6 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -582,7 +578,6 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
-        --
 
         lua_ls = {
           -- cmd = {...},
@@ -607,7 +602,6 @@ require('lazy').setup({
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
-      --    :Mason
       --
       --  You can press `g?` for help in this menu.
       require('mason').setup()
